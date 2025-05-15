@@ -27,7 +27,7 @@ import (
 	"strings"
 	"testing"
 
-	. "github.com/jakobmoellerdev/lvm2go"
+	. "github.com/azalio/lvm2go"
 )
 
 func Test_RawConfig(t *testing.T) {

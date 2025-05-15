@@ -21,7 +21,7 @@ import (
 	"fmt"
 	"testing"
 
-	. "github.com/jakobmoellerdev/lvm2go"
+	. "github.com/azalio/lvm2go"
 )
 
 func TestLVRename(t *testing.T) {

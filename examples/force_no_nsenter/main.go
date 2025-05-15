@@ -31,6 +31,10 @@ func main() {
 	// Check if we're running in a containerized environment
 	isContainerized := lvm2go.IsContainerized(ctx)
 	fmt.Printf("Running in containerized environment: %v\n", isContainerized)
+	
+	// Check if nsenter will be used with the default context
+	willUseNsenter := lvm2go.WillUseNsenter(ctx)
+	fmt.Printf("Will use nsenter with default context: %v\n", willUseNsenter)
 
 	// Example 1: Standard behavior (uses nsenter if containerized)
 	fmt.Println("\nExample 1: Standard behavior")
@@ -48,6 +52,11 @@ func main() {
 	// Example 2: Force no nsenter, even if containerized
 	fmt.Println("\nExample 2: Force no nsenter")
 	ctxNoNsenter := lvm2go.WithForceNoNsenter(ctx, true)
+	
+	// Check if nsenter will be used with the modified context
+	willUseNsenterWithModifiedCtx := lvm2go.WillUseNsenter(ctxNoNsenter)
+	fmt.Printf("Will use nsenter with modified context: %v\n", willUseNsenterWithModifiedCtx)
+	
 	cmd2 := lvm2go.CommandContext(ctxNoNsenter, "ls", "-l", "/")
 	fmt.Printf("Command path: %s\n", cmd2.Path)
 	fmt.Printf("Command args: %v\n", cmd2.Args)

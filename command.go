@@ -133,6 +133,13 @@ func shouldForceNoNsenter(ctx context.Context) bool {
 	return false
 }
 
+// WillUseNsenter returns whether nsenter will be used for the given context.
+// This is useful for debugging purposes to verify the behavior of CommandContext.
+// It returns true if the context indicates a containerized environment and ForceNoNsenter is not set.
+func WillUseNsenter(ctx context.Context) bool {
+	return IsContainerized(ctx) && !shouldForceNoNsenter(ctx)
+}
+
 func CommandWithCustomEnvironment(ctx context.Context, cmd *exec.Cmd) *exec.Cmd {
 	if UseStandardLocale() {
 		cmd.Env = append(cmd.Env, "LC_ALL=C")

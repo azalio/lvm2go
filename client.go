@@ -35,6 +35,25 @@ func NewClient() Client {
 	return &client{}
 }
 
+// WithNoNsenter returns a new client that will force all operations to not use nsenter,
+// even if running in a containerized environment. This is useful when you want to ensure
+// that all operations are performed directly in the container's namespace, without using
+// nsenter to access the host's namespace.
+//
+// Example usage:
+//
+//	// Create a standard client
+//	standardClient := lvm2go.NewClient()
+//
+//	// Create a client that will never use nsenter
+//	noNsenterClient := lvm2go.WithNoNsenter(standardClient)
+//
+//	// All operations with this client will bypass nsenter
+//	vgs, err := noNsenterClient.VGs(ctx)
+func WithNoNsenter(client Client) Client {
+	return &noNsenterClient{client: client}
+}
+
 // Client provides operations on lvm2 logical volumes, volume groups, and physical volumes as well as the hosts lvm2
 // subsystem.
 type Client interface {

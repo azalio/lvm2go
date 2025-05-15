@@ -50,11 +50,12 @@ func GetProcessCancelWaitDelay(ctx context.Context) time.Duration {
 }
 
 // CommandContext creates exec.Cmd with custom args. it is equivalent to exec.Command(cmd, args...) when not containerized.
-// When containerized, it calls nsenter with the provided command and args.
+// When containerized, it calls nsenter with the provided command and args, unless ForceNoNsenter is set in the context
+// using WithForceNoNsenter.
 func CommandContext(ctx context.Context, cmd string, args ...string) *exec.Cmd {
 	var c *exec.Cmd
 
-	if IsContainerized(ctx) {
+	if IsContainerized(ctx) && !shouldForceNoNsenter(ctx) {
 		args = append([]string{"-m", "-u", "-i", "-n", "-p", "-t", "1", cmd}, args...)
 		c = exec.CommandContext(ctx, nsenter, args...)
 	} else {
@@ -106,9 +107,16 @@ func IsContainerized(ctx context.Context) bool {
 }
 
 var envContextKey = struct{}{}
+var forceNoNsenterKey = struct{}{}
 
 func WithCustomEnvironment(ctx context.Context, env map[string]string) context.Context {
 	return context.WithValue(ctx, envContextKey, env)
+}
+
+// WithForceNoNsenter creates a context that forces CommandContext to not use nsenter
+// even if IsContainerized returns true.
+func WithForceNoNsenter(ctx context.Context, force bool) context.Context {
+	return context.WithValue(ctx, forceNoNsenterKey, force)
 }
 
 func GetCustomEnvironment(ctx context.Context) map[string]string {
@@ -116,6 +124,20 @@ func GetCustomEnvironment(ctx context.Context) map[string]string {
 		return env
 	}
 	return nil
+}
+
+func shouldForceNoNsenter(ctx context.Context) bool {
+	if force, ok := ctx.Value(forceNoNsenterKey).(bool); ok {
+		return force
+	}
+	return false
+}
+
+// WillUseNsenter returns whether nsenter will be used for the given context.
+// This is useful for debugging purposes to verify the behavior of CommandContext.
+// It returns true if the context indicates a containerized environment and ForceNoNsenter is not set.
+func WillUseNsenter(ctx context.Context) bool {
+	return IsContainerized(ctx) && !shouldForceNoNsenter(ctx)
 }
 
 func CommandWithCustomEnvironment(ctx context.Context, cmd *exec.Cmd) *exec.Cmd {

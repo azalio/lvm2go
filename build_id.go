@@ -6,7 +6,7 @@ import (
 	"sync"
 )
 
-const DefaultModuleID = "github.com/jakobmoellerdev/lvm2go"
+const DefaultModuleID = "github.com/azalio/lvm2go"
 
 // ModuleID returns the module ID of the library used for identification
 // in the logs and other places. It defaults to using the BuildInfo

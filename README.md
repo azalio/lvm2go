@@ -1,9 +1,9 @@
 # lvm2go (Alpha)
 
 [![Go Reference](https://pkg.go.dev/badge/github.com/jakobmoellerdev/lvm2go.svg)](https://pkg.go.dev/github.com/jakobmoellerdev/lvm2go)
-[![Test](https://github.com/jakobmoellerdev/lvm2go/actions/workflows/test.yaml/badge.svg)](https://github.com/jakobmoellerdev/lvm2go/actions/workflows/test.yaml)
+[![Test](https://github.com/azalio/lvm2go/actions/workflows/test.yaml/badge.svg)](https://github.com/azalio/lvm2go/actions/workflows/test.yaml)
 [![Go Report Card](https://goreportcard.com/badge/github.com/jakobmoellerdev/lvm2go)](https://goreportcard.com/report/github.com/jakobmoellerdev/lvm2go)
-[![License](https://img.shields.io/github/license/jakobmoellerdev/lvm2go)](https://github.com/jakobmoellerdev/lvm2go)
+[![License](https://img.shields.io/github/license/jakobmoellerdev/lvm2go)](https://github.com/azalio/lvm2go)
 
 Package lvm2go implements a Go API for the lvm2 command line tools.
 

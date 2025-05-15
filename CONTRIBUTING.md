@@ -16,13 +16,14 @@ Thank you for considering contributing to lvm2go! Your contributions are valuabl
 
 ## Code of Conduct
 
-By participating in this project, you agree to abide by the [Contributor Covenant Code of Conduct](CODE_OF_CONDUCT.md). Please report unacceptable behavior to [jakobmoellerdev@example.com](mailto:jakobmoellerdev@example.com).
+By participating in this project, you agree to abide by the [Contributor Covenant Code of Conduct](CODE_OF_CONDUCT.md). Please report unacceptable behavior to [azalio@azalio.net](mailto:azalio@azalio.net).
 
 ## How to Contribute
 
 ### Reporting Bugs
 
 If you find a bug, please report it by opening an issue on GitHub. Include the following details:
+
 - A clear and descriptive title
 - Steps to reproduce the bug
 - Expected and actual behavior
@@ -31,6 +32,7 @@ If you find a bug, please report it by opening an issue on GitHub. Include the f
 ### Suggesting Features
 
 We welcome suggestions for new features! To suggest a feature, open an issue on GitHub and include:
+
 - A clear and descriptive title
 - A detailed description of the feature and its benefits
 - Any relevant mockups or examples
@@ -50,18 +52,21 @@ We welcome suggestions for new features! To suggest a feature, open an issue on 
 To set up a development environment, follow these steps:
 
 1. Clone the repository:
+
     ```sh
-    git clone https://github.com/jakobmoellerdev/lvm2go.git
+    git clone https://github.com/azalio/lvm2go.git
     cd lvm2go
     ```
 
 2. Install the necessary dependencies:
+
     ```sh
     # Example for Fedora
     dnf install lvm2
     ```
 
 3. Run the library tests:
+
     ```sh
     # Example for a Node.js project
     sudo go test -v ./...
@@ -72,6 +77,7 @@ For detailed setup instructions, refer to the project's [README.md](README.md).
 ## Style Guide
 
 Please adhere to the following style guidelines:
+
 - Follow the existing code style and conventions.
 - Write clear and concise comments.
 - Use meaningful variable and function names.
@@ -82,6 +88,7 @@ Please adhere to the following style guidelines:
 Ensure that your changes do not break existing functionality by running the tests. Add new tests for any new features or bug fixes.
 
 To run tests:
+
 ```sh
 sudo go test -v ./...
 ```
